@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class PmsBrandServiceImpl implements PmsBrandService {
 
-    @Resource
+   @Resource
    private PmsBrandMapper brandMapper;
 
     @Override

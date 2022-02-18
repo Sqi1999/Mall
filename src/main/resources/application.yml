@@ -9,6 +9,7 @@ spring:
   main:
     allow-circular-references: true
 
+
 mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
