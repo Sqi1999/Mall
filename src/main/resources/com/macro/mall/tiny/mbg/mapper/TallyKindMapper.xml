@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.tiny.mbg.mapper.TallyKindMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.tiny.mbg.model.TallyKind">
+    <id column="kind_id" jdbcType="INTEGER" property="kindId" />
+    <result column="kind_name" jdbcType="VARCHAR" property="kindName" />
+    <result column="kind_categoryid" jdbcType="INTEGER" property="kindCategoryid" />
+    <result column="kind_remark" jdbcType="VARCHAR" property="kindRemark" />
+    <result column="kind_sort" jdbcType="INTEGER" property="kindSort" />
+    <result column="kind_userid" jdbcType="INTEGER" property="kindUserid" />
+    <result column="kind_img" jdbcType="VARCHAR" property="kindImg" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    kind_id, kind_name, kind_categoryid, kind_remark, kind_sort, kind_userid, kind_img
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.tiny.mbg.model.TallyKindExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tally_kind
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tally_kind
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tally_kind
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.tiny.mbg.model.TallyKindExample">
+    delete from tally_kind
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.tiny.mbg.model.TallyKind">
+    insert into tally_kind (kind_id, kind_name, kind_categoryid, 
+      kind_remark, kind_sort, kind_userid, 
+      kind_img)
+    values (#{kindId,jdbcType=INTEGER}, #{kindName,jdbcType=VARCHAR}, #{kindCategoryid,jdbcType=INTEGER}, 
+      #{kindRemark,jdbcType=VARCHAR}, #{kindSort,jdbcType=INTEGER}, #{kindUserid,jdbcType=INTEGER}, 
+      #{kindImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.tiny.mbg.model.TallyKind">
+    insert into tally_kind
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kindId != null">
+        kind_id,
+      </if>
+      <if test="kindName != null">
+        kind_name,
+      </if>
+      <if test="kindCategoryid != null">
+        kind_categoryid,
+      </if>
+      <if test="kindRemark != null">
+        kind_remark,
+      </if>
+      <if test="kindSort != null">
+        kind_sort,
+      </if>
+      <if test="kindUserid != null">
+        kind_userid,
+      </if>
+      <if test="kindImg != null">
+        kind_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kindId != null">
+        #{kindId,jdbcType=INTEGER},
+      </if>
+      <if test="kindName != null">
+        #{kindName,jdbcType=VARCHAR},
+      </if>
+      <if test="kindCategoryid != null">
+        #{kindCategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="kindRemark != null">
+        #{kindRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="kindSort != null">
+        #{kindSort,jdbcType=INTEGER},
+      </if>
+      <if test="kindUserid != null">
+        #{kindUserid,jdbcType=INTEGER},
+      </if>
+      <if test="kindImg != null">
+        #{kindImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.tiny.mbg.model.TallyKindExample" resultType="java.lang.Long">
+    select count(*) from tally_kind
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tally_kind
+    <set>
+      <if test="record.kindId != null">
+        kind_id = #{record.kindId,jdbcType=INTEGER},
+      </if>
+      <if test="record.kindName != null">
+        kind_name = #{record.kindName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindCategoryid != null">
+        kind_categoryid = #{record.kindCategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.kindRemark != null">
+        kind_remark = #{record.kindRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kindSort != null">
+        kind_sort = #{record.kindSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.kindUserid != null">
+        kind_userid = #{record.kindUserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.kindImg != null">
+        kind_img = #{record.kindImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tally_kind
+    set kind_id = #{record.kindId,jdbcType=INTEGER},
+      kind_name = #{record.kindName,jdbcType=VARCHAR},
+      kind_categoryid = #{record.kindCategoryid,jdbcType=INTEGER},
+      kind_remark = #{record.kindRemark,jdbcType=VARCHAR},
+      kind_sort = #{record.kindSort,jdbcType=INTEGER},
+      kind_userid = #{record.kindUserid,jdbcType=INTEGER},
+      kind_img = #{record.kindImg,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.tiny.mbg.model.TallyKind">
+    update tally_kind
+    <set>
+      <if test="kindName != null">
+        kind_name = #{kindName,jdbcType=VARCHAR},
+      </if>
+      <if test="kindCategoryid != null">
+        kind_categoryid = #{kindCategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="kindRemark != null">
+        kind_remark = #{kindRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="kindSort != null">
+        kind_sort = #{kindSort,jdbcType=INTEGER},
+      </if>
+      <if test="kindUserid != null">
+        kind_userid = #{kindUserid,jdbcType=INTEGER},
+      </if>
+      <if test="kindImg != null">
+        kind_img = #{kindImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.tiny.mbg.model.TallyKind">
+    update tally_kind
+    set kind_name = #{kindName,jdbcType=VARCHAR},
+      kind_categoryid = #{kindCategoryid,jdbcType=INTEGER},
+      kind_remark = #{kindRemark,jdbcType=VARCHAR},
+      kind_sort = #{kindSort,jdbcType=INTEGER},
+      kind_userid = #{kindUserid,jdbcType=INTEGER},
+      kind_img = #{kindImg,jdbcType=VARCHAR}
+    where kind_id = #{kindId,jdbcType=INTEGER}
+  </update>
+</mapper>
